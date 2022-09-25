@@ -1,0 +1,14 @@
+name: CI
+
+on:
+  push:
+
+jobs:
+  run:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: dart-lang/setup-dart@v1
+      - run: dart pub global activate --verbose --source path .
+      - run: foo --verbose
+      - run: foo --verbose
