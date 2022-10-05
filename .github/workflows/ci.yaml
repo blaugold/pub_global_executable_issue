@@ -9,6 +9,14 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: dart-lang/setup-dart@v1
-      - run: dart pub global activate --verbose --source path .
+      - run: |
+          git clone https://github.com/dart-lang/pub
+          cd pub
+          dart pub get
+          gh pr checkout 3586
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - run: dart pub global activate --verbose --source path .
+      - run: dart pub/bin/pub.dart global activate --verbose --source path .
       - run: foo --verbose
       - run: foo --verbose
